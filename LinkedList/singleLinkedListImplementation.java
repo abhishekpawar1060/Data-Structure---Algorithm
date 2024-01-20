@@ -103,6 +103,23 @@ public class singleLinkedListImplementation {
         return size;
     }
 
+
+    public int minElement(){
+        if(head == null){
+            return -1;
+        }
+
+        Node fast = head;
+        Node slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        return slow.val;
+    }
+
+
     public static void main(String[] args) {
         singleLinkedListImplementation list = new singleLinkedListImplementation();
 
@@ -111,18 +128,22 @@ public class singleLinkedListImplementation {
 
         list.addFirst(1);
         list.addFirst(0);
+        list.addFirst(8);
+
 
         list.display();
 
-        System.out.println(list.removeFromLast());
+        // System.out.println(list.removeFromLast());
 
-        list.display();
+        // list.display();
 
-        System.out.println(list.removeFromFirst());
+        // System.out.println(list.removeFromFirst());
 
-        list.display();
+        // list.display();
 
-        System.out.println(list.size());
+        System.out.println("Size of LinkedList is : "+list.size());
+
+        System.out.println("Mid Node of LinkedList : "+list.minElement());
     }
 
     
