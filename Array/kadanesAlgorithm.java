@@ -55,6 +55,7 @@ public class kadanesAlgorithm{
 
             if(sum == 0){
                 start = i;
+                
             }
 
             sum += arr[i];
