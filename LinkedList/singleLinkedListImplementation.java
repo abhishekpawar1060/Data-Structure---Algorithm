@@ -84,6 +84,28 @@ public class singleLinkedListImplementation {
     }
 
 
+    //reversed LinkedList
+    public void reversedLikedList(){
+        if(head == null){
+            return;
+        }
+
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            Node front = curr.next;
+
+            curr.next = prev;
+            prev = curr;
+            curr = front;
+
+        }
+
+        head = prev;
+    }
+
+
     public void display(){
         if(head == null){
             System.out.println("Empty Linked List");
@@ -104,7 +126,7 @@ public class singleLinkedListImplementation {
     }
 
 
-    public int minElement(){
+    public int middleElement(){
         if(head == null){
             return -1;
         }
@@ -143,7 +165,12 @@ public class singleLinkedListImplementation {
 
         System.out.println("Size of LinkedList is : "+list.size());
 
-        System.out.println("Mid Node of LinkedList : "+list.minElement());
+        System.out.println("Mid Node of LinkedList : "+list.middleElement());
+
+        list.reversedLikedList();
+
+        System.out.print("Reversed Linked List: ");
+        list.display();
     }
 
     
