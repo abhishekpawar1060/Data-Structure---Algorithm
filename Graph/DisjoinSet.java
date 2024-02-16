@@ -13,19 +13,19 @@ class DisjoinSet{
         }
     }
 
-    public int findUnoinParent(int node){
+    public int findUnionParent(int node){
         if(node == parent.get(node)){
             return node;
         }
 
-        int ulp = findUnoinParent(parent.get(node));
+        int ulp = findUnionParent(parent.get(node));
         parent.set(node, ulp);
         return parent.get(node);
     }
 
     public void unionByRank(int u, int v){
-      int ulp_u = findUnoinParent(u);
-      int ulp_v = findUnoinParent(v); 
+      int ulp_u = findUnionParent(u);
+      int ulp_v = findUnionParent(v); 
       
       if(ulp_u == ulp_v){
         return;
@@ -46,8 +46,8 @@ class DisjoinSet{
 
 
     public void unionBySize(int u, int v){
-        int ulp_u = findUnoinParent(u);
-        int ulp_v = findUnoinParent(v); 
+        int ulp_u = findUnionParent(u);
+        int ulp_v = findUnionParent(v); 
         
         if(ulp_u == ulp_v){
           return;
@@ -90,14 +90,14 @@ class DisjoinSet{
         ds.unionBySize(6, 7);
         ds.unionBySize(5, 6);
 
-        if(ds.findUnoinParent(3) == ds.findUnoinParent(7)){
+        if(ds.findUnionParent(3) == ds.findUnionParent(7)){
             System.out.println("Same");
         }else{
             System.out.println("Not Same");
         }
 
         ds.unionBySize(3, 7);
-        if(ds.findUnoinParent(3) == ds.findUnoinParent(7)){
+        if(ds.findUnionParent(3) == ds.findUnionParent(7)){
             System.out.println("Same");
         }else{
             System.out.println("Not Same");

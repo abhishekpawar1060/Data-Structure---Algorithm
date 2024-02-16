@@ -11,7 +11,7 @@ public class bridgeInGraphs {
             this.dest = d;
         }
     }
-
+//Tarjans Algorithhm
     public static void createGraph(ArrayList<Edge> graph[]) {
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<Edge>();
