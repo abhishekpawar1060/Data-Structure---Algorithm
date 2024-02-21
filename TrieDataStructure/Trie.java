@@ -6,7 +6,7 @@ public class Trie {
         Node children[] = new Node[26];
         boolean eow;  //end of word 
         public Node(){
-            for(int i = 0; i < 16; i++){
+            for(int i = 0; i < 26; i++){
                 children[i] = null;
             }    
         }
@@ -57,20 +57,66 @@ public class Trie {
         return true;
 
     }
+   
+    public static boolean wordBreak(String key) {
+        int len = key.length();
+ 
+        if(len == 0) {
+            return true;
+        }
+ 
+        for(int i=1; i<=len; i++) {
+            if( search(key.substring(0, i)) &&
+                wordBreak(key.substring(i)) ) {
+                    return true;
+                }
+        }
+ 
+        return false;
+    }
+
+
+    public static String ans = "";
+    public static void longestWord(Node root, StringBuilder curr) {
+        if (root == null) {
+            return;
+        }
+    
+        for (int i = 0; i < 26; i++) {
+            if (root.children[i] != null && root.children[i].eow == true) {
+                curr.append((char) (i + 'a'));
+                if (curr.length() > ans.length()) {
+                    ans = curr.toString();
+                }
+                longestWord(root.children[i], curr);
+
+                curr.deleteCharAt(curr.length() - 1);
+            }
+        }
+    }
+ 
+ 
 
     public static void main(String[] args) {
-        String words[] = {"the", "a", "there", "their", "any", "thee"};
-       for (String word : words) {
+        String words[] = {"the", "t","there", "their", "any", "thee"};
+        for (String word : words) {
            insert(word);
            System.out.println("inserted " + word);
-       }
+        }
+
+    //    System.out.println("thee -> " + search("thee"));
+    //    System.out.println("thor -> " + search("thor"));
 
 
-       System.out.println("thee -> " + search("thee"));
-       System.out.println("thor -> " + search("thor"));
+    //    System.out.println(startsWith("the"));
+    //    System.out.println(startsWith("thi"));
 
+    //    System.out.println(wordBreak("there"));
 
-       System.out.println(startsWith("the"));
-       System.out.println(startsWith("thi"));
+        
+        
+        longestWord(root, new StringBuilder(""));
+        System.out.println("Longest word : "+ans);
+
     }
 }
