@@ -84,6 +84,29 @@ public class BinaryTree {
         }
     }
 
+    public static int countOfNodes(Node root){
+        if(root == null){
+            return 0;
+        }
+
+
+        int leftNodes = countOfNodes(root.left);
+        int rightNodes = countOfNodes(root.right);
+
+        return leftNodes + rightNodes + 1;
+
+    }
+
+    public static int SumOfNodes(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftNodesSum = SumOfNodes(root.left);
+        int rightNodesSum = SumOfNodes(root.right);
+
+        return leftNodesSum + rightNodesSum + root.data;
+    }
 
     public static void main(String[] args) {
         int[] node = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -99,7 +122,11 @@ public class BinaryTree {
         System.out.println();
 
         levelOrder(root);
+
+        System.out.println("Total number of Nodes:" +countOfNodes(root));
         
+        System.out.println("Sum of all Nodes:" +SumOfNodes(root));
+
     }
 
    
