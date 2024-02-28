@@ -161,6 +161,38 @@ public class BinaryTree {
         return myInfo;
     }
 
+    public static int sumOfKthLevel(Node root, int k){
+        if(root == null){
+            return 0;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        int sum = 0;
+        int level = 0;
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            level++;
+            for(int i = 0; i < size; i++) {
+                Node curr = q.poll();
+                if(level == k){
+                    sum += curr.data;
+                }   
+                if(curr.left != null){
+                    q.add(curr.left);
+                } 
+                if(curr.right != null){
+                    q.add(curr.right);
+                }
+            }
+            if(level == k){
+                break;
+            }
+        }    
+        return sum;
+
+    }
+
 
 
 
@@ -189,6 +221,9 @@ public class BinaryTree {
         System.out.println("Diameter of Tree:" +DiameterOfTree(root));
 
         System.out.println("Diameter of Tree1:" +diameter(root).diam);
+
+        System.out.println("Sum of Kth Level Nodes :" +sumOfKthLevel(root,3));
+
         
     }
 
