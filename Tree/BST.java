@@ -1,3 +1,5 @@
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+
 public class BST {
 
     static class Node {
@@ -96,6 +98,23 @@ public class BST {
 
         return root;
     }
+
+    public static void PrintInRange(Node root, int x, int y){
+        if(root == null){
+            return;
+        }
+        if(root.data >= x && root.data <= y){
+            PrintInRange(root.left, x, y);
+            System.out.print(root.data+" ");
+            PrintInRange(root.right, x, y);
+        }
+        else if (root.data >= y) {
+            PrintInRange(root.left, x, y);
+        }
+        else{
+            PrintInRange(root.right, x, y);
+        }
+    }
     public static void main(String[] args) {
         int[] val = {5, 1, 3, 4, 2, 7};
         Node root = null;
@@ -113,5 +132,8 @@ public class BST {
         deleteNode(root, 3);
 
         inOrder(root);
+        System.out.println();
+
+        PrintInRange(root, 1, 5);
     } 
 }
