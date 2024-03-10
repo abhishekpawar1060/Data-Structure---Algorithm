@@ -1,4 +1,4 @@
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+import java.util.ArrayList;
 
 public class BST {
 
@@ -115,6 +115,31 @@ public class BST {
             PrintInRange(root.right, x, y);
         }
     }
+
+    public static void RootToLeafPath(Node root, ArrayList<Integer> path){
+        if(root == null){
+            return;
+        }
+
+        path.add(root.data);
+
+        if(root.left == null && root.right == null){
+            printPath(path);
+        }else{
+            RootToLeafPath(root.left, path);
+            RootToLeafPath(root.right, path);
+        }
+        
+        path.remove(path.size()-1);
+    }
+
+    public static void printPath(ArrayList<Integer> path){
+        for (Integer it : path) {
+            System.out.print(it+"->");
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         int[] val = {5, 1, 3, 4, 2, 7};
         Node root = null;
@@ -135,5 +160,8 @@ public class BST {
         System.out.println();
 
         PrintInRange(root, 1, 5);
+        System.out.println();
+
+        RootToLeafPath(root, new ArrayList<>());
     } 
 }
