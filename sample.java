@@ -5,5 +5,9 @@ public class sample {
         System.out.println(45 + "AB");
         System.out.println('a');
 
+        double a = Math.sqrt(25);
+        
+
+
     }
 }
