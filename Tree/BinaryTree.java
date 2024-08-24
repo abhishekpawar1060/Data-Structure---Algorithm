@@ -1,13 +1,18 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 
 public class BinaryTree {
     public static class  Node {
         int data;
+        int hd;   //horizontal distance of the node
         Node left;
         Node right;
         public Node(int data){
             this.data = data;
+            this.hd = 0;
             this.left = null;
             this.right = null;
         }
@@ -194,6 +199,36 @@ public class BinaryTree {
     }
 
 
+    public static ArrayList<Integer> bottomViewOfBinaryTree(Node root){
+        ArrayList<Integer> res = new ArrayList<>();
+        if(root == null){
+            return res;
+        }
+        Map<Integer, Integer> map = new TreeMap<>();
+        Queue<Node> q = new LinkedList<>();
+        root.hd = 0;        //Horizontal distance of the Node
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node temp = q.poll();
+            int hd = temp.hd;
+            map.put(hd, temp.data);
+            if(temp.left != null){
+                temp.left.hd = hd - 1;
+                q.add(temp.left);
+            }
+
+            if(temp.right != null){
+                temp.right.hd = hd + 1;
+                q.add(temp.right);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            res.add(entry.getValue());
+        }
+
+        return res;
+    }
 
 
 
@@ -224,7 +259,7 @@ public class BinaryTree {
 
         System.out.println("Sum of Kth Level Nodes :" +sumOfKthLevel(root,3));
 
-        
+        System.out.println("Bottom View Of Binary Tree : " +bottomViewOfBinaryTree(root));
     }
 
    
