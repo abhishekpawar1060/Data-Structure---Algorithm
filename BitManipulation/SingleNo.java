@@ -49,8 +49,34 @@ public class SingleNo {
 
         return ones;
     }
+
+
+    private static int[] singleNo_III(){
+        int[] res = new int[2];
+        int[] arr = {4, 2, 4, 5, 2, 3, 3, 1};
+        int xor = 0;
+        for(int it : arr){
+            xor = xor ^ it;
+        }
+
+        int rightMost = (xor & xor-1) ^ xor;  //It make the rightmost bit only ones and remaining all zero's
+        int b1 = 0;
+        int b2 = 0;
+        for(int it : arr){
+            if((it & rightMost) != 0){
+                b1 = b1 ^ it;
+            }else{
+                b2 = b2 ^ it;
+            }
+        }
+
+        res[0] = b1;
+        res[1] = b2;
+        return res;
+    }
     public static void main(String[] args) {
         System.out.println(singleNo_I());
         System.out.println(singleNo_II());
+        System.out.println(Arrays.toString(singleNo_III()));
     }
 }
