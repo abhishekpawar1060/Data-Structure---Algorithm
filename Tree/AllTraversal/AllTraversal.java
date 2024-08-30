@@ -86,24 +86,47 @@ public class AllTraversal {
             return res;
         }
 
-        Stack<Node> s1 = new Stack<>();
-        Stack<Node> s2 = new Stack<>();
+        // Stack<Node> s1 = new Stack<>();
+        // Stack<Node> s2 = new Stack<>();
         
-        s1.push(root);
+        // s1.push(root);
 
-        while(!s1.isEmpty()){
-            root = s1.pop();
-            s2.push(root);
-            if(root.left != null){
-                s1.push(root.left);
-            }
-            if(root.right != null){
-                s1.push(root.right);
-            }
-        }
+        // while(!s1.isEmpty()){
+        //     root = s1.pop();
+        //     s2.push(root);
+        //     if(root.left != null){
+        //         s1.push(root.left);
+        //     }
+        //     if(root.right != null){
+        //         s1.push(root.right);
+        //     }
+        // }
 
-        while(!s2.isEmpty()){
-            res.add(s2.pop().data);
+        // while(!s2.isEmpty()){
+        //     res.add(s2.pop().data);
+        // }
+
+
+        // By Using the 1 Stack
+        Stack<Node> s = new Stack<>();
+        Node curr = root;
+        while (curr != null || !s.isEmpty()) {
+            if(curr != null){
+                s.push(curr);
+                curr = curr.left;
+            }else{
+                Node temp = s.peek().right;
+                if(temp == null){
+                    temp = s.pop();
+                    res.add(temp.data);
+                    while(!s.isEmpty() && temp == s.peek().right){
+                        temp = s.pop();
+                        res.add(temp.data);
+                    }
+                }else{
+                    curr = temp;
+                }
+            }
         }
         return res;
     }
